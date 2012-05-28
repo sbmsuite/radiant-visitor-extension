@@ -1,0 +1,26 @@
+- if flash[:notice]
+  #notice
+    %p= flash[:notice]
+- if flash[:error]
+  #error
+    %p= flash[:error]
+
+<h2>Sign up</h2>
+
+- form_for @user do |f|
+  %p
+    = f.error_messages
+  %p
+    = f.label :email, t('email_address') , :class => "optional"
+    = f.text_field "email", :class => 'textbox', :size => 32, :maxlength => 255
+      
+  - if @user.password_required?
+    %p
+      = f.text_field "login", :class => "textbox", :size => 32, :maxlength => 40
+    %p
+      = f.label :password, t('new_password')
+      = f.password_field "password", :class => "textbox big", :value => "", :size => 15, :maxlength => 40
+    %p
+      = f.label :password_confirmation, t('password_confirmation')
+      = f.password_field "password_confirmation", :class => "textbox big", :value => "", :size => 15, :maxlength => 40
+  = f.submit "Sign up"
